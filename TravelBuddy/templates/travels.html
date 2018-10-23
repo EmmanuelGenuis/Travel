@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TravelBuddy</title>
+    <style>
+    
+    *{
+    margin:0px ;
+    padding:0px ;
+    /* outline: 1px solid red ; */
+}
+
+.special{
+        float:right;
+    }
+#destination {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#destination td, #destination th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+#destination tr:nth-child(even){background-color: #f2f2f2;}
+
+#destination tr:hover {background-color: #ddd;
+}
+
+#destination th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: rgb(22, 19, 156);
+    color: white;
+}
+
+#plan {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#plan td, #plan th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+#plan tr:nth-child(even){background-color: #f2f2f2;}
+
+#plan tr:hover {background-color: #ddd;
+}
+
+#plan th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: rgb(22, 19, 156);
+    color: white;
+}
+    </style>
+</head>
+<body>
+    <a class='special' href='/logout'>Logout</a>
+
+    <h1>Hello, {{request.session.username}}!</h1>
+
+    <br><br><br>
+    <p>Your trip schedules</p>
+     <table id="plan">
+         <tr>
+             <th>Destination</th>
+             <th>Travel start date</th>
+             <th>Travel end date</th>
+             <th>plan</th>
+            
+         </tr>
+         {%for plan in plans%}
+         <tr>
+             
+                <td><a href='destination/{{plan.id}}'>{{plan.destination}}</a></td>
+                <td>{{plan.start}}</td>
+                <td>{{plan.end}}</td>
+                <td>{{plan.description}}</td>     
+        </tr>
+        {%endfor%} 
+        
+        {%for join in joins%}
+        <tr>
+                <td><a href='destination/{{join.added_plan.id}}'>{{join.added_plan.destination}}</a></td>
+                <td>{{join.added_plan.start}}</td>
+                <td>{{join.added_plan.end}}</td>
+                <td>{{join.added_plan.description}}</td>  
+
+        </tr>
+        {%endfor%}
+        <br><br>
+    
+    </table>
+       <br><br><br>
+       <p>Other User's Travel Plans</p>
+       <table id="destination">
+            <tr>
+                <th>Name</th>
+                <th>Destination</th>
+                <th>Travel start date</th>
+                <th>Travel end date</th>
+                <th>Do you want to join?</th>
+               
+            </tr>
+            {%for destination in destinations%}
+            <tr>
+                   <td>{{destination.added_by.username}}</td>
+                   <td><a href='destination/{{destination.id}}'>{{destination.destination}}</a></td>
+                   <td>{{destination.start}}</td>
+                   <td>{{destination.end}}</td>
+                   <td><a href='join/{{destination.id}}'>Join</a></td>     
+           </tr>
+           {%endfor%} 
+           <br>
+     </table>
+     <br>
+     <a class='special' href='add'>Add Travel Plan</a>
+</body>
+</html>

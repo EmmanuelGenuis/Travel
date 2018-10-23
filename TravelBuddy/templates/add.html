@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        a{
+        float:right;
+
+        }
+        input[type=submit]{
+        float:right;
+
+    }
+            input[type=text] {
+            background-color: rgb(255, 255, 255);
+            color: black;}
+            input[type=submit] {
+            background-color: rgb(29, 20, 156);
+            color: white;
+        }
+        body{
+            margin:20px ;
+            padding:30px ;
+            
+        }
+        .holder{
+            outline:10px solid rgb(31, 55, 192) ;
+            width: 500px ;
+            height: 700px;
+            padding: 10px ;
+        }
+    </style>
+        </head>
+        <a href='travels' >Home</a><br><br><br>    
+        <a href='main' >Logout</a>
+    <body>
+            <div class='holder'>
+            <h1>Add a Trip</h1>
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+            <form action='travels/create' method='post'>
+                {% csrf_token %}
+            <input type='text' name='destination' placeholder="Destination"><br><br><br>
+            <input type='text' name='description' placeholder="Description"><br><br><br>
+            <P>Travel Date From:<input type='date' name='travel_from'></P><br><br><br>
+            <P>Travel Date to:<input type='date' name='travel_to' ></P><br><br><br>
+            <input type='submit' value='Add'>
+            </form>
+            <br><br><br>
+            </div>
+   </body>
+</html>

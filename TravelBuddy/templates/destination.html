@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+a{
+        float:right;
+
+        }
+
+</style>
+<body>
+        <a href='/travels' >Home</a><br><br><br>    
+        <a href='/logout' >Logout</a>
+    <h1>Planned by:{{users.added_by.username}}</h1>
+    <h2>Description:{{users.description}}</h2>
+    <h2>Travel date from:{{users.start}}</h2>
+    <h2>Travel date to:{{users.end}}</h2>
+    <br><br><br>
+    <h1>Other user's joining the trip</h1>
+    {%for join in joins%}
+    <h2>{{join.added_user.username}}</h2>
+    {%endfor%}
+</body>
+</html>
